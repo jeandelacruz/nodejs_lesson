@@ -1,4 +1,4 @@
-import { UserModelInterface } from "./userModelInterface";
+import { UserModelInterface } from "./usersModelInterface";
 
 export class UserModel extends UserModelInterface {
   constructor() {

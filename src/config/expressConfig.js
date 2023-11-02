@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 
 export class ExpressConfig {
   constructor() {
-    this.port = 3000;
+    this.port = process.env.PORT;
     this.app = express();
     this._setMiddleware();
   }

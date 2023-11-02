@@ -1,6 +1,6 @@
-import { UserModel } from "./userModel";
-import { UserService } from "./userService";
-import { UserController } from "./userController";
+import { UserModel } from "./usersModel";
+import { UserService } from "./usersService";
+import { UserController } from "./usersController";
 
 export class UserRouter {
   constructor() {

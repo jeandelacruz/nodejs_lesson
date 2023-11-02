@@ -1,5 +1,7 @@
+import "dotenv/config";
+import "./utils/models";
 import { ExpressConfig } from "./config/expressConfig";
-import { UserRouter } from "./modules/users/userRouter";
+import { UserRouter } from "./modules/users/usersRouter";
 
 const express = new ExpressConfig();
 
