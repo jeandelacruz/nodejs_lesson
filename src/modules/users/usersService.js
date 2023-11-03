@@ -1,25 +1,28 @@
-export class UserService {
+import { UserInterface } from "./usersInterface";
+
+export class UserService extends UserInterface {
   constructor(userModel) {
+    super();
     this.userModel = userModel;
   }
 
-  getAllUsers() {
-    return this.userModel.getAll();
+  async getAll() {
+    return await this.userModel.findAll();
   }
 
-  getUserById(id) {
-    return this.userModel.getById(id);
+  getById(id) {
+    //return this.userModel.getById(id);
   }
 
-  createUser(body) {
-    return this.userModel.create(body);
+  create(body) {
+    //return this.userModel.create(body);
   }
 
-  updateUser(id, body) {
-    return this.userModel.update(id, body);
+  update(id, body) {
+    //return this.userModel.update(id, body);
   }
 
-  deleteUser(id) {
-    return this.userModel.delete(id);
+  delete(id) {
+    //return this.userModel.delete(id);
   }
 }

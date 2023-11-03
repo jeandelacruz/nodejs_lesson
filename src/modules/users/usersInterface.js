@@ -1,4 +1,4 @@
-export class UserModelInterface {
+export class UserInterface {
   getAll() {}
   getById(id) {}
   create(body) {}

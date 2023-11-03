@@ -1,10 +1,10 @@
-import { UserModel } from "./usersModel";
+import { models } from "../../infrastructure/models";
 import { UserService } from "./usersService";
 import { UserController } from "./usersController";
 
 export class UserRouter {
   constructor() {
-    this.model = new UserModel();
+    this.model = models.users;
     this.service = new UserService(this.model);
     this.controller = new UserController(this.service);
   }

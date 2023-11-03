@@ -1,5 +1,5 @@
 import "dotenv/config";
-import "./utils/models";
+import "./infrastructure/models";
 import { ExpressConfig } from "./config/expressConfig";
 import { UserRouter } from "./modules/users/usersRouter";
 

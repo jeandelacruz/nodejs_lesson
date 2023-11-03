@@ -3,5 +3,5 @@ require("@babel/register");
 const path = require("path");
 
 module.exports = {
-  "models-path": path.resolve("src", "modules"),
+  "models-path": path.resolve("src", "infrastructure", "models"),
 };

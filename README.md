@@ -1,3 +1,5 @@
+# Empezamos a las 7:05 pm
+
 # Nodejs Sesion
 
 ### Principios SOLID
