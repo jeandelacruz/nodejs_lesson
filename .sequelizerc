@@ -4,4 +4,5 @@ const path = require("path");
 
 module.exports = {
   "models-path": path.resolve("src", "infrastructure", "models"),
+  "migrations-path": path.resolve("src", "migrations"),
 };

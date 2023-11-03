@@ -19,4 +19,4 @@ modulesFolders.forEach((folder) => {
   }
 });
 
-export { models };
+export { models, sequelize };

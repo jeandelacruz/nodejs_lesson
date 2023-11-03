@@ -10,19 +10,27 @@ export class UserService extends UserInterface {
     return await this.userModel.findAll();
   }
 
-  getById(id) {
-    //return this.userModel.getById(id);
+  async getById(id) {
+    return await this.userModel.findOne({ where: id });
   }
 
-  create(body) {
-    //return this.userModel.create(body);
+  async create(body) {
+    return await this.userModel.create(body);
   }
 
-  update(id, body) {
-    //return this.userModel.update(id, body);
+  async update(id, body) {
+    const user = await this.getById(id);
+    if (user) {
+      await user.update(body);
+    }
+    return user;
   }
 
-  delete(id) {
-    //return this.userModel.delete(id);
+  async delete(id) {
+    const user = await this.getById(id);
+    if (user) {
+      await user.destroy();
+    }
+    return user;
   }
 }

@@ -7,32 +7,32 @@ export class UserController {
     return res.json(await this.userService.getAll());
   }
 
-  getUserById(req, res) {
+  async getUserById(req, res) {
     const userID = req.params.id;
-    const user = this.userService.getById(parseInt(userID));
+    const user = await this.userService.getById(parseInt(userID));
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
     return res.json(user);
   }
 
-  createUser(req, res) {
-    const user = this.userService.create(req.body);
+  async createUser(req, res) {
+    const user = await this.userService.create(req.body);
     return res.status(201).json(user);
   }
 
-  updateUser(req, res) {
+  async updateUser(req, res) {
     const userID = req.params.id;
-    const user = this.userService.update(parseInt(userID), req.body);
+    const user = await this.userService.update(parseInt(userID), req.body);
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
     return res.json(user);
   }
 
-  deleteUser(req, res) {
+  async deleteUser(req, res) {
     const userID = req.params.id;
-    const deleted = this.userService.delete(parseInt(userID));
+    const deleted = await this.userService.delete(parseInt(userID));
     if (!deleted) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
