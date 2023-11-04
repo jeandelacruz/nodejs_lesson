@@ -1,6 +1,12 @@
 import { Model, DataTypes } from "sequelize";
 
 class RoleModel extends Model {
+  static associate(models) {
+    this.hasMany(models.users, {
+      foreignKey: "rol_id",
+    });
+  }
+
   static init(sequelize) {
     return super.init(
       {

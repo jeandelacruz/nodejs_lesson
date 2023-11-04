@@ -1,13 +1,28 @@
 import { UserInterface } from "./usersInterface";
 
 export class UserService extends UserInterface {
-  constructor(userModel) {
+  constructor(models) {
     super();
-    this.userModel = userModel;
+    this.userModel = models.users;
+    this.roleModel = models.roles;
   }
 
   async getAll() {
-    return await this.userModel.findAll();
+    return await this.userModel.findAll({
+      attributes: {
+        exclude: ["password"],
+      },
+      where: {
+        status: true,
+      },
+      order: [["id", "ASC"]],
+      include: {
+        model: this.roleModel,
+        attributes: {
+          exclude: ["status", "created_at", "updated_at"],
+        },
+      },
+    });
   }
 
   async getById(id) {

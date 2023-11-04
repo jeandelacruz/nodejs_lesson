@@ -4,8 +4,7 @@ import { UserController } from "./usersController";
 
 export class UserRouter {
   constructor() {
-    this.model = models.users;
-    this.service = new UserService(this.model);
+    this.service = new UserService(models);
     this.controller = new UserController(this.service);
   }
 

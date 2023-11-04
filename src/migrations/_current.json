@@ -48,6 +48,33 @@
                     "field": "name",
                     "seqType": "Sequelize.STRING"
                 },
+                "last_name": {
+                    "field": "last_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "username": {
+                    "field": "username",
+                    "seqType": "Sequelize.STRING"
+                },
+                "email": {
+                    "field": "email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "password": {
+                    "field": "password",
+                    "seqType": "Sequelize.STRING"
+                },
+                "rol_id": {
+                    "field": "rol_id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "status": {
+                    "defaultValue": {
+                        "value": true
+                    },
+                    "field": "status",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
                 "created_at": {
                     "allowNull": false,
                     "field": "created_at",
@@ -62,5 +89,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 3
 }
