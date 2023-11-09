@@ -5,3 +5,7 @@ export class UserInterface {
   update(id, body) {}
   delete(id) {}
 }
+
+export class UserPasswordInterface {
+  hashPassword(password) {}
+}

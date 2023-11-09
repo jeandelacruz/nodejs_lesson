@@ -1,10 +1,11 @@
 import { UserInterface } from "./usersInterface";
 
 export class UserService extends UserInterface {
-  constructor(models) {
+  constructor(models, passwordService) {
     super();
     this.userModel = models.users;
     this.roleModel = models.roles;
+    this.passwordService = passwordService;
   }
 
   async getAll() {
@@ -37,7 +38,10 @@ export class UserService extends UserInterface {
     const user = await this.getById(id);
     if (user) {
       if ("password" in body) {
-        await user.hashPassword();
+        const hashPassword = await this.passwordService.hashPassword(
+          body.password
+        );
+        body.password = hashPassword;
       }
       await user.update(body);
     }
