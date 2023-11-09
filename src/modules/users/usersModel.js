@@ -1,4 +1,6 @@
 import { Model, DataTypes } from "sequelize";
+import { hashSync, genSaltSync } from "bcryptjs";
+import config from "../../config/authConfig";
 
 class UserModel extends Model {
   static associate(models) {
@@ -40,6 +42,11 @@ class UserModel extends Model {
         modelName: "users",
       }
     );
+  }
+
+  async hashPassword() {
+    let passwordHash = hashSync(this.password, genSaltSync(config.rounds));
+    this.password = passwordHash;
   }
 }
 

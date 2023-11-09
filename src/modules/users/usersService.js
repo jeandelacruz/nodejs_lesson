@@ -36,6 +36,9 @@ export class UserService extends UserInterface {
   async update(id, body) {
     const user = await this.getById(id);
     if (user) {
+      if ("password" in body) {
+        await user.hashPassword();
+      }
       await user.update(body);
     }
     return user;
