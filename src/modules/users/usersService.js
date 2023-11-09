@@ -31,6 +31,8 @@ export class UserService extends UserInterface {
   }
 
   async create(body) {
+    const hashPassword = await this.passwordService.hashPassword(body.password);
+    body.password = hashPassword;
     return await this.userModel.create(body);
   }
 

@@ -1,9 +1,11 @@
 import { AuthInterface } from "./authInterface";
-
+import {} from "../users/usersService";
 export class AuthService extends AuthInterface {
-  constructor(userModel) {
+  constructor(userModel, passwordService, userService) {
     super();
     this.userModel = userModel;
+    this.passwordService = passwordService;
+    this.userService = userService;
   }
 
   async _getByUsername(username) {
@@ -13,13 +15,21 @@ export class AuthService extends AuthInterface {
   async signIn(body) {
     const { username, password } = body;
     const user = await this._getByUsername(username);
-    console.log(user);
     if (user) {
+      const validatePassword = await this.passwordService.validatePassword(
+        user.password,
+        password
+      );
+      if (!validatePassword) {
+        return false;
+      }
     }
     return user;
   }
 
-  signUp(body) {}
+  async signUp(body) {
+    return await this.userService.create(body);
+  }
 
   refreshToken(body) {}
 

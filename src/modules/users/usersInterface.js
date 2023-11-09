@@ -8,4 +8,5 @@ export class UserInterface {
 
 export class UserPasswordInterface {
   hashPassword(password) {}
+  validatePassword(passwordHash, password) {}
 }
