@@ -1,5 +1,4 @@
 import { AuthInterface } from "./authInterface";
-import {} from "../users/usersService";
 export class AuthService extends AuthInterface {
   constructor(userModel, passwordService, userService) {
     super();
@@ -31,7 +30,9 @@ export class AuthService extends AuthInterface {
     return await this.userService.create(body);
   }
 
-  refreshToken(body) {}
+  async refreshToken(identity) {
+    return await this.userService.getById(identity);
+  }
 
   resetPassword(body) {}
 }

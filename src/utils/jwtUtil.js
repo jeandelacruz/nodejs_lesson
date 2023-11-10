@@ -1,4 +1,4 @@
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import config from "../config/authConfig";
 
 export const createToken = (identity) => {
@@ -16,4 +16,8 @@ export const createToken = (identity) => {
     accessToken,
     refreshToken,
   };
+};
+
+export const verifyToken = (token) => {
+  return verify(token, config.secretKey);
 };

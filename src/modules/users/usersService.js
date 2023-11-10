@@ -1,4 +1,5 @@
 import { UserInterface } from "./usersInterface";
+import { UserNotFound } from "./usersException";
 
 export class UserService extends UserInterface {
   constructor(models, passwordService) {
@@ -27,7 +28,11 @@ export class UserService extends UserInterface {
   }
 
   async getById(id) {
-    return await this.userModel.findOne({ where: id });
+    const user = await this.userModel.findOne({ where: id });
+    if (!user) {
+      throw new UserNotFound();
+    }
+    return user;
   }
 
   async create(body) {
@@ -38,23 +43,27 @@ export class UserService extends UserInterface {
 
   async update(id, body) {
     const user = await this.getById(id);
-    if (user) {
-      if ("password" in body) {
-        const hashPassword = await this.passwordService.hashPassword(
-          body.password
-        );
-        body.password = hashPassword;
-      }
-      await user.update(body);
+    if (!user) {
+      throw new UserNotFound();
     }
+
+    if ("password" in body) {
+      const hashPassword = await this.passwordService.hashPassword(
+        body.password
+      );
+      body.password = hashPassword;
+    }
+    await user.update(body);
+
     return user;
   }
 
   async delete(id) {
     const user = await this.getById(id);
-    if (user) {
-      await user.destroy();
+    if (!user) {
+      throw new UserNotFound();
     }
+    await user.destroy();
     return user;
   }
 }

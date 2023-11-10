@@ -8,12 +8,13 @@ export class UserController {
   }
 
   async getUserById(req, res) {
-    const userID = req.params.id;
-    const user = await this.userService.getById(parseInt(userID));
-    if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+    try {
+      const userID = req.params.id;
+      const user = await this.userService.getById(parseInt(userID));
+      return res.json(user);
+    } catch (e) {
+      return res.status(e.code).json({ message: e.message });
     }
-    return res.json(user);
   }
 
   async createUser(req, res) {
@@ -22,21 +23,23 @@ export class UserController {
   }
 
   async updateUser(req, res) {
-    const userID = req.params.id;
-    const user = await this.userService.update(parseInt(userID), req.body);
-    if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+    try {
+      const userID = req.params.id;
+      const user = await this.userService.update(parseInt(userID), req.body);
+      return res.json(user);
+    } catch (e) {
+      return res.status(e.code).json({ message: e.message });
     }
-    return res.json(user);
   }
 
   async deleteUser(req, res) {
-    const userID = req.params.id;
-    const deleted = await this.userService.delete(parseInt(userID));
-    if (!deleted) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+    try {
+      const userID = req.params.id;
+      await this.userService.delete(parseInt(userID));
+      return res.status(204).send("");
+    } catch (e) {
+      return res.status(e.code).json({ message: e.message });
     }
-    return res.status(204).send("");
   }
 }
 
