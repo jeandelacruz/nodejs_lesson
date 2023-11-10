@@ -15,15 +15,18 @@ class UserRouter {
 
   init() {
     // Manera Global
-    // this.router.use(isAuthenticated);
-    return this.router
-      .get("/", [isAuthenticated], (req, res) =>
-        this.controller.getAllUsers(req, res)
-      )
-      .post("/", (req, res) => this.controller.createUser(req, res))
-      .get("/:id", (req, res) => this.controller.getUserById(req, res))
-      .patch("/:id", (req, res) => this.controller.updateUser(req, res))
-      .delete("/:id", (req, res) => this.controller.deleteUser(req, res));
+    this.router.use(isAuthenticated);
+    return (
+      this.router
+        /** Manera individual
+         * .get("/", [isAuthenticated], (req, res) => {})
+         */
+        .get("/", (req, res) => this.controller.getAllUsers(req, res))
+        .post("/", (req, res) => this.controller.createUser(req, res))
+        .get("/:id", (req, res) => this.controller.getUserById(req, res))
+        .patch("/:id", (req, res) => this.controller.updateUser(req, res))
+        .delete("/:id", (req, res) => this.controller.deleteUser(req, res))
+    );
   }
 }
 

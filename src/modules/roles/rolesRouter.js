@@ -2,6 +2,7 @@ import { Router } from "express";
 import { models } from "../../infrastructure/models";
 import { RoleService } from "./rolesService";
 import { RoleController } from "./rolesController";
+import { isAuthenticated } from "../../middlewares/authenticationMiddleware";
 
 class RoleRouter {
   constructor() {
@@ -12,6 +13,7 @@ class RoleRouter {
   }
 
   init() {
+    this.router.use(isAuthenticated);
     return this.router
       .get("/", (req, res) => this.controller.getAllRoles(req, res))
       .post("/", (req, res) => this.controller.createRole(req, res))
