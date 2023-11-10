@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import { errors } from "celebrate";
 import routers from "../infrastructure/routers";
 
 export class ExpressConfig {
@@ -16,6 +17,7 @@ export class ExpressConfig {
 
   _setRouters() {
     routers(this.app);
+    this.app.use(errors());
   }
 
   listen() {

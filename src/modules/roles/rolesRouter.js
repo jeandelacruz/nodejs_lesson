@@ -3,6 +3,7 @@ import { models } from "../../infrastructure/models";
 import { RoleService } from "./rolesService";
 import { RoleController } from "./rolesController";
 import { isAuthenticated } from "../../middlewares/authenticationMiddleware";
+import Validation from "./rolesValidation";
 
 class RoleRouter {
   constructor() {
@@ -13,11 +14,13 @@ class RoleRouter {
   }
 
   init() {
-    this.router.use(isAuthenticated);
+    // this.router.use(isAuthenticated);
     return this.router
       .get("/", (req, res) => this.controller.getAllRoles(req, res))
       .post("/", (req, res) => this.controller.createRole(req, res))
-      .get("/:id", (req, res) => this.controller.getRoleById(req, res))
+      .get("/:id", Validation.getById(), (req, res) =>
+        this.controller.getRoleById(req, res)
+      )
       .patch("/:id", (req, res) => this.controller.updateRole(req, res))
       .delete("/:id", (req, res) => this.controller.deleteRole(req, res));
   }
